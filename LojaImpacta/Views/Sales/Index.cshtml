@@ -2,6 +2,15 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    string GetProductString(int PID)
+    {
+        List<Product> allProducts = (List<Product>)ViewData["AllProducts"];
+
+        Product matchingProduct = allProducts.Find(p => p.ProductID == PID);
+
+        return $"#{matchingProduct.ProductID} - {matchingProduct.ProductName}";
+    }
 }
 
 <h1>Vendas realizadas</h1>
@@ -33,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.SaleDate)
                 </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductID)
+                @(GetProductString(item.ProductID))
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AmountBought)

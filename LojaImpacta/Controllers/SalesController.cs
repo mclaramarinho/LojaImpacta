@@ -22,6 +22,10 @@ namespace LojaImpacta.Controllers
         // GET: Sales
         public async Task<IActionResult> Index()
         {
+            var allProducts = await _context.Product.ToListAsync();
+
+            ViewData["AllProducts"] = allProducts;
+
             return View(await _context.Sale.ToListAsync());
         }
 
@@ -68,6 +72,7 @@ namespace LojaImpacta.Controllers
             ViewData["SelectedProductID"] = prod.ProductID;
             ViewData["SelectedProductName"] = prod.ProductName;
             ViewData["SelectedProductQt"] = prod.AmountAvailabel;
+            ViewData["SelectedProductImg"] = prod.ImageUrl;
             ViewData["Clientes"] = clientsList;
             ViewData["Vendedores"] = employeesList;
 
@@ -90,6 +95,7 @@ namespace LojaImpacta.Controllers
                 sale.SaleID = Guid.NewGuid();
                 sale.ProductID = ProductID;
                 sale.FinalPrice = prod.Price * sale.AmountBought;
+                sale.SaleDate = DateTime.Now;
                 _context.Add(sale);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -11,7 +11,8 @@ namespace LojaImpacta.Models
 
         [Display(Name = "Data da venda")]
         [DataType(DataType.DateTime)]
-        public DateTime? SaleDate = DateTime.UtcNow;
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0: dd/MM/yyyy - hh:mm:ss}")]
+        public DateTime SaleDate { get; set; }
 
         [Display(Name = "Vendedor")]
         [Required]

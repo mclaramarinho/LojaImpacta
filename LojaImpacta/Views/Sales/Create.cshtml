@@ -14,7 +14,8 @@
 <h5>Produto: @(ViewData["SelectedProductName"])</h5>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <img class="col-12 m-auto col-md-4 m-md-0 d-block mw-100" src="@ViewData["SelectedProductImg"]" />
+    <div class="col-12 m-auto m-md-0 col-md-4">
         <form asp-action="Create" asp-route-ProductID="@(ViewData["SelectedProductID"])" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -39,6 +40,7 @@
             </div>
         </form>
     </div>
+
 </div>
 
 

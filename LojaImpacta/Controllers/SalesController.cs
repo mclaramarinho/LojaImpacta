@@ -35,6 +35,15 @@ namespace LojaImpacta.Controllers
 
             var sale = await _context.Sale
                 .FirstOrDefaultAsync(m => m.SaleID == id);
+
+            var prod = await _context.Product.FindAsync(sale.ProductID);
+            var salesperson = await _context.User.FindAsync(sale.SalesPersonID);
+            var client = await _context.User.FindAsync(sale.ClientID);
+
+            ViewData["ProductInfo"] = $"#{prod.ProductID} | {prod.ProductName}";
+            ViewData["Vendedor"] = salesperson.Name;
+            ViewData["Cliente"] = client.Name;
+
             if (sale == null)
             {
                 return NotFound();
@@ -99,10 +108,20 @@ namespace LojaImpacta.Controllers
 
             var sale = await _context.Sale
                 .FirstOrDefaultAsync(m => m.SaleID == id);
+
             if (sale == null)
             {
                 return NotFound();
             }
+
+            var prod = await _context.Product.FindAsync(sale.ProductID);
+
+            var salesperson = await _context.User.FindAsync(sale.SalesPersonID);
+            var client = await _context.User.FindAsync(sale.ClientID);
+
+            ViewData["ProductInfo"] = $"#{prod.ProductID} | {prod.ProductName}";
+            ViewData["Vendedor"] = salesperson.Name;
+            ViewData["Cliente"] = client.Name;
 
             return View(sale);
         }
@@ -117,6 +136,7 @@ namespace LojaImpacta.Controllers
             {
                 var prod = await _context.Product.FindAsync(sale.ProductID);
                 prod.AmountAvailabel += sale.AmountBought;
+
                 _context.Product.Update(prod);
 
                 _context.Sale.Remove(sale);

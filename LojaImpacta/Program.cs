@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using LojaImpacta.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<LojaImpactaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LojaImpactaContext") ?? throw new InvalidOperationException("Connection string 'LojaImpactaContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -29,11 +29,11 @@
             <tr>
                 <td>@Model.SaleID</td>
                 <td>@Model.SaleDate</td>
-                <td>@Model.ProductID</td>
+                <td>@ViewData["ProductInfo"]</td>
                 <td>@Model.AmountBought</td>
                 <td>R$@Model.FinalPrice</td>
-                <td>@Model.SalesPersonID</td>
-                <td>@Model.ClientID</td>
+                <td>@ViewData["Vendedor"]</td>
+                <td>@ViewData["Cliente"]</td>
             </tr>
         </tbody>
     </table>

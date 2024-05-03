@@ -12,6 +12,9 @@
                 @Html.DisplayNameFor(model => model.SaleID)
             </th>
             <th>
+                Data de Venda
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ProductID)
             </th>
             <th>
@@ -26,6 +29,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SaleID)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleDate)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductID)
             </td>

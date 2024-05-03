@@ -21,14 +21,19 @@
                 <input class="form-control" id="cpf" type="text" value="@Model.SaleDate" disabled />
             </div>
             <div class="form-group">
-                <label class="form-label" for="accesslvl" class="fw-bold">ID do vendedor:</label>
-                <input class="form-control" id="accesslvl" type="text" value="@Model.SalesPersonID" disabled />
+                <label class="form-label" for="accesslvl" class="fw-bold">Vendedor:</label>
+                <input class="form-control" id="accesslvl" type="text" value="@ViewData["Vendedor"]" disabled />
             </div>
+            <div class="form-group">
+                <label class="form-label" for="accesslvl" class="fw-bold">Produto:</label>
+                <input class="form-control" id="accesslvl" type="text" value="@ViewData["ProductInfo"]" disabled />
+            </div>
+
         </div>
         <div class="col-12 col-md-6">
             <div class="form-group">
-                <label class="form-label" for="email" class="fw-bold">ID do Cliente:</label>
-                <input class="form-control" id="email" type="text" value="@Model.ClientID" disabled />
+                <label class="form-label" for="email" class="fw-bold">Cliente:</label>
+                <input class="form-control" id="email" type="text" value="@ViewData["Cliente"]" disabled />
             </div>
             <div class="form-group">
                 <label class="form-label" for="isActive" class="fw-bold">Quantidade comprada:</label>

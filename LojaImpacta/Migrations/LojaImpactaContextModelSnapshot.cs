@@ -89,6 +89,9 @@ namespace LojaImpacta.Migrations
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("SaleDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("SalesPersonID")
                         .HasColumnType("int");
 

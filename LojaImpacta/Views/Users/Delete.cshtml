@@ -1,0 +1,41 @@
+﻿@model LojaImpacta.Models.User
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<a asp-action="Index" class="btn btn-md btn-outline-none text-dark">
+    <i class="bi bi-chevron-compact-left"></i>
+    Voltar
+</a>
+<h1>Excluir usuário</h1>
+
+<h3>Tem certeza que deseja excluir esse usuário?</h3>
+<div>
+    <hr />
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.UserID)</th>
+                <th>@Html.DisplayNameFor(model => model.AccessLevel)</th>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.CPF)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.UserID</td>
+                <td>@(Model.AccessLevel == 1 ? "Admin" : Model.AccessLevel == 2 ? "Vendedor"
+                    : Model.AccessLevel == 3 ? "Cliente" : Model.AccessLevel == 4 ? "Fornecedor" : "Nao alocado")</td>
+                <td>@Model.Name</td>
+                <td>@Model.CPF</td>
+                <td>@Model.Email</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="UserID" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </form>
+</div>

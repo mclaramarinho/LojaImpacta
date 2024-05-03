@@ -1,0 +1,45 @@
+﻿@model LojaImpacta.Models.Sale
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<a asp-action="Index" class="btn btn-md btn-outline-none text-dark">
+    <i class="bi bi-chevron-compact-left"></i>
+    Voltar
+</a>
+<h1>Excluir venda</h1>
+
+<h3>Tem certeza que deseja excluir essa venda?</h3>
+<div>
+    <hr />
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Cód. Venda</th>
+                <th>@Html.DisplayNameFor(model => model.SaleDate)</th>
+                <th>@Html.DisplayNameFor(model => model.ProductID)</th>
+                <th>@Html.DisplayNameFor(model => model.AmountBought)</th>
+                <th>@Html.DisplayNameFor(model => model.FinalPrice)</th>
+                <th>@Html.DisplayNameFor(model => model.SalesPersonID)</th>
+                <th>@Html.DisplayNameFor(model => model.ClientID)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.SaleID</td>
+                <td>@Model.SaleDate</td>
+                <td>@Model.ProductID</td>
+                <td>@Model.AmountBought</td>
+                <td>R$@Model.FinalPrice</td>
+                <td>@Model.SalesPersonID</td>
+                <td>@Model.ClientID</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SaleID" />
+        <input type="submit" value="Excluir" class="btn btn-danger" />
+    </form>
+</div>

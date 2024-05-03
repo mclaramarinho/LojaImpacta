@@ -1,0 +1,47 @@
+﻿@model LojaImpacta.Models.Sale
+
+@{
+    ViewData["Title"] = "Create";
+    Product selectedProduct = (Product)ViewData["SelectedProduct"];
+}
+
+<a asp-action="Index" asp-controller="Products" class="btn btn-md btn-outline-none text-dark">
+    <i class="bi bi-chevron-compact-left"></i>
+    Voltar
+</a>
+<h1>Vender</h1>
+
+<h5>Produto: @(ViewData["SelectedProductName"])</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-route-ProductID="@(ViewData["SelectedProductID"])" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SalesPersonID" class="control-label"></label>
+                <select class="form-select" asp-for="SalesPersonID" asp-items="@((IEnumerable<SelectListItem>)ViewData["Vendedores"])"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientID" class="control-label"></label>
+                <select class ="form-select" asp-for="ClientID" asp-items="@((IEnumerable<SelectListItem>)ViewData["Clientes"])"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductID" class="control-label"></label>
+                <input disabled name="ProductID" class="form-control" value="@(ViewData["SelectedProductID"])" />
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="AmountBought" class="control-label"></label>
+                <input asp-for="AmountBought" class="form-control" min="1" max="@(ViewData["SelectedProductQt"])" />
+                <span asp-validation-for="AmountBought" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Confirmar Venda" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

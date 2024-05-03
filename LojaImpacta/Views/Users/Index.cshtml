@@ -1,0 +1,73 @@
+﻿@model IEnumerable<LojaImpacta.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Usuarios</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-md btn-outline-light text-dark">Criar novo user</a>
+</p>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+            <th>
+                Nível de Acesso
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <p>@(item.AccessLevel == 1 ? "Admin" : item.AccessLevel == 2 ? "Vendedor"
+                    : item.AccessLevel == 3 ? "Cliente" : item.AccessLevel == 4 ? "Fornecedor" 
+                    : "Não alocado")</p>
+            </td>
+            <td>
+                <p>@(item.AccountActive ? "Sim" : "Não")</p>
+            </td>
+                <td class="text-end text-nowrap">
+                    <a asp-action="Edit" asp-route-id="@item.UserID"
+                       class="btn btn-sm text-success">
+                        <i class="bi bi-pencil"></i>
+                    </a>|
+                    <a asp-action="Details" asp-route-id="@item.UserID"
+                       class="btn btn-sm text-primary">
+                        <i class="bi bi-eye"></i>
+                    </a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserID"
+                       class="btn btn-sm text-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

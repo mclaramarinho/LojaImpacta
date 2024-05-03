@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LojaImpacta.Models.AccessLevel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Níveis de Acesso</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-md btn-outline-light text-dark">Criar novo nível</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>@Html.DisplayNameFor(model => model.LevelName)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccessLevelID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LevelName)
+            </td>
+            <td class="text-end">
+                <a asp-action="Edit" asp-route-id="@item.AccessLevelID"
+                    class="btn btn-sm text-success">
+                    <i class="bi bi-pencil"></i>
+                </a>|
+                <a asp-action="Delete" asp-route-id="@item.AccessLevelID"
+                    class="btn btn-sm text-danger">
+                        <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

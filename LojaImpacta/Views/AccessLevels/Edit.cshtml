@@ -1,0 +1,34 @@
+﻿@model LojaImpacta.Models.AccessLevel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<a asp-action="Index" class="btn btn-md btn-outline-none text-dark">
+    <i class="bi bi-chevron-compact-left"></i>
+    Voltar
+</a>
+<h1>Editar</h1>
+
+<h4>Editar Nível de Acesso</h4>
+<hr />
+<div class="row">
+    <div class="col-6 col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AccessLevelID" />
+            <div class="form-group">
+                <label asp-for="LevelName" class="control-label"></label>
+                <input asp-for="LevelName" class="form-control" />
+                <span asp-validation-for="LevelName" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

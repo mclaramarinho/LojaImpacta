@@ -1,0 +1,60 @@
+﻿@model LojaImpacta.Models.Sale
+
+@{
+    ViewData["Title"] = "Details";
+}
+<a asp-action="Index" class="btn btn-md btn-outline-none text-dark">
+    <i class="bi bi-chevron-compact-left"></i>
+    Voltar
+</a>
+
+<div class="container">
+<h1>Detalhes da venda</h1>
+    <div class="row justify-content-between">
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <label class="form-label" for="username" class="fw-bold">Cód. Venda:</label>
+                <input class="form-control" id="username" type="text" value="@Model.SaleID" disabled />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="cpf" class="fw-bold">Data da venda:</label>
+                <input class="form-control" id="cpf" type="text" value="@Model.SaleDate" disabled />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="accesslvl" class="fw-bold">ID do vendedor:</label>
+                <input class="form-control" id="accesslvl" type="text" value="@Model.SalesPersonID" disabled />
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <label class="form-label" for="email" class="fw-bold">ID do Cliente:</label>
+                <input class="form-control" id="email" type="text" value="@Model.ClientID" disabled />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="isActive" class="fw-bold">Quantidade comprada:</label>
+                <input class="form-control" id="isActive" type="text" value="@Model.AmountBought" disabled />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="isActive" class="fw-bold">Preço final:</label>
+                <input class="form-control" id="isActive" type="text" value="@($"R${Model.FinalPrice}")" disabled />
+            </div>
+
+            <div class="row mt-4 row-cols-auto justify-content-end">
+                <div class="col">
+                    <a asp-action="Delete"
+                       asp-route-id="@Model?.SaleID"
+                       class="btn btn-sm btn-outline-danger">
+                        Excluir
+                    </a>
+                </div>
+                <div class="col">
+                    <a asp-action="Edit"
+                       asp-route-id="@Model?.SaleID"
+                       class="btn btn-sm btn-outline-primary">
+                        Editar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

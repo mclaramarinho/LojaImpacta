@@ -1,0 +1,48 @@
+﻿@model IEnumerable<LojaImpacta.Models.Sale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vendas realizadas</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountBought)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountBought)
+            </td>
+                <td class="text-end">
+                    <a asp-action="Details" asp-route-id="@item.SaleID"
+                       class="btn btn-sm text-success">
+                        <i class="bi bi-eye"></i>
+                    </a>|
+                    <a asp-action="Delete" asp-route-id="@item.SaleID"
+                       class="btn btn-sm text-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

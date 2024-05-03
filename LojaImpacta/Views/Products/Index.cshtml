@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LojaImpacta.Models.Product>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<h1>Todos os produtos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-md btn-outline-light text-dark">Adicionar novo produto</a>
+</p>
+
+<div class="container">
+    <div class="row row-cols-lg-4 row-cols-3 gap-5">
+        @foreach(var item in Model)
+        {
+            <div class="card">
+                <img src="@item.ImageUrl" class="d-block h-50 object-cover" alt="@item.ProductName" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.ProductName</h5>
+                    <p class="card-text text-truncate">@item.Description</p>
+                    <p class="lead">R$@item.Price</p>
+                    <a asp-action="Details" asp-controller="Products"
+                        asp-route-id="@item.ProductID"
+                        class="btn btn-lg btn-success">Comprar</a>
+                    <div class="container p-0">
+                        <a asp-action="Edit" asp-controller="Products"
+                            asp-route-id="@item.ProductID"
+                            class="btn btn-sm btn-outline-none text-dark">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a asp-action="Delete" asp-controller="Products"
+                             asp-route-id="@item.ProductID"
+                             class="btn btn-sm btn-outline-none text-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

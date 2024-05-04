@@ -2,6 +2,17 @@
 
 @{
     ViewData["Title"] = "Produtos";
+
+    int priceSelected = -1;
+    bool availableOnly = false;
+    if(ViewData["AvailableOnly"] != null)
+    {
+        availableOnly = (bool)ViewData["AvailableOnly"];
+    }
+    if(ViewData["PriceRange"] != null)
+    {
+        priceSelected = (int)ViewData["PriceRange"];
+    }
 }
 
 <h1>Todos os produtos</h1>
@@ -11,7 +22,38 @@
 </p>
 
 <div class="container">
+    <form asp-action="IndexFilter" method="get" class="row mb-3 justify-content-between">
+        <div class="col-12 col-md-4">
+            <input name="prodName" value="@(ViewData["ProdName"])" type="text" class="form-control" placeholder="Pesquisar pelo nome..." />
+        </div>
+       
+        <div class="col-6 col-md-3">
+
+            <select name="priceRange" class="form-select">
+                <option selected="@(priceSelected==0)" value="0">Todos os preços</option>
+                <option selected="@(priceSelected==1)" value="1">R$1-R$500</option>
+                <option selected="@(priceSelected==2)" value="2">R$500-R$1500</option>
+                <option selected="@(priceSelected==3)" value="3">R$1500+</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-3">
+            <label class="form-label">Apenas disponíveis</label>
+            <input name="availableOnly" type="radio" checked="@(availableOnly)" />
+        </div>
+        <div class="col-12 m-auto col-md-2 m-md-0">
+            <a asp-action="Index" class="btn btn-sm btn-outline-none text-dark">Limpar</a>
+            <input type="submit" value="Filtrar" class="btn btn-sm btn-success" /> 
+        </div>
+    </form>
     <div class="row row-cols-lg-4 row-cols-3 gap-5">
+        @if(Model.Count() == 0)
+        {
+            <div class="container mt-5">
+                <div class="row text-center">
+                    <h2>Não há produtos com essas especificações.</h2>
+                </div>
+            </div>
+        }
         @foreach(var item in Model)
         {
             <div class="card">

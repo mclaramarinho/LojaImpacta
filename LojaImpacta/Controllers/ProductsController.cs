@@ -21,8 +21,48 @@ namespace LojaImpacta.Controllers
 
         // GET: Products
         public async Task<IActionResult> Index()
-        {
+        {   
             return View(await _context.Product.ToListAsync());
+        }
+
+        // GET: Products
+        public async Task<IActionResult> IndexFilter(string prodName, int priceRange, string? availableOnly)
+        {
+            Console.WriteLine($"{prodName}, {priceRange}, {availableOnly}");
+            List<Product> allProducts = await _context.Product.ToListAsync();
+            ViewData["ProdName"] = prodName;
+            ViewData["PriceRange"] = priceRange;
+            ViewData["AvailableOnly"] = false;
+
+            if(prodName != null)
+            {
+                allProducts = allProducts.FindAll(i => i.ProductName.ToUpper().Contains(prodName.ToUpper()));
+                ViewData["ProdName"] = prodName;
+            }   
+
+            if(priceRange != 0) { 
+                ViewData["PriceRange"] = priceRange;
+                //1 - priceRange > 1 to 500
+                if(priceRange == 1)
+                {
+                    allProducts = allProducts.FindAll(i => i.Price >= 1 && i.Price <= 500);
+                }else if(priceRange == 2)
+                //2 - priceRange > 500 to 1500
+                {
+                    allProducts = allProducts.FindAll(i => i.Price >= 501 && i.Price <= 1500);
+                }
+                else if(priceRange == 3)
+                //3 - priceRange > 1500+
+                {
+                    allProducts = allProducts.FindAll(i => i.Price >= 1501);
+                }
+            }
+            if(availableOnly == "on")
+            {
+                ViewData["AvailableOnly"] = true;
+                allProducts = allProducts.FindAll(i => i.AmountAvailabel > 0);
+            }
+            return View(nameof(Index), allProducts);
         }
 
         // GET: Products/Details/5
